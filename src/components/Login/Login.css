@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.title {
+  color: cornflowerblue;
+  text-align: center;
+}
+
+.btn {
+  margin: 10px auto;
+  width: 50%;
+  font-size: 16px;
+  padding: 10px 0;
+}
