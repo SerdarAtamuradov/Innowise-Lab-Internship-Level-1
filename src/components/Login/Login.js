@@ -3,7 +3,7 @@ import app from "../../firebase";
 import {Redirect, withRouter} from "react-router-dom";
 import {AuthContext} from "../../Auth";
 import {Box, Button, Container} from "@material-ui/core";
-import './Login.css';
+import '../component.css';
 
 const Login = ({history}) => {
   const handleLogin = useCallback(async event => {
@@ -24,31 +24,27 @@ const Login = ({history}) => {
   }
 
   return (
-    <Container>
+    <Container className="container">
       <h1 className="title">Login Page</h1>
       <Box>
         <form className="form" onSubmit={handleLogin}>
           <label>
-            Email
+            <span>Email:</span>
             <input name="email" type="email" placeholder="Email"/>
           </label>
           <label>
-            Password
+            <span>Password:</span>
             <input name="password" type="password" placeholder="Password"/>
           </label>
-          {/*<button className="btn login__btn" type="submit">Log In</button>*/}
           <Button type="submit" variant="outlined" color="primary">
             Log In
           </Button>
         </form>
       </Box>
       <hr/>
-      <Box>
-        <h3>Don't have an account?</h3>
-        {/*<button onClick={() => history.push("/signup")}>Sign Up</button>*/}
-        <Button onClick={() => history.push("/signup")} type="submit" variant="outlined" color="primary">
-          Sign Up
-        </Button>
+      <Box className="another-page">
+        <span>Don't have an account?</span>
+        <Button onClick={() => history.push("/signup")} color="primary">Sign Up</Button>
       </Box>
     </Container>
   );

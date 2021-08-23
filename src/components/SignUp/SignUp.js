@@ -2,6 +2,7 @@ import React, {useCallback} from 'react';
 import app from "../../firebase";
 import {withRouter} from "react-router-dom";
 import {Box, Button, Container} from "@material-ui/core";
+import '../component.css';
 
 const SignUp = ({history}) => {
   const handleSignUp = useCallback(async event => {
@@ -16,29 +17,27 @@ const SignUp = ({history}) => {
   }, [history]);
 
   return (
-    <Container maxWidth="sm">
+    <Container className="container">
       <h1 className="title">Signup Page</h1>
       <Box>
         <form className="form" onSubmit={handleSignUp}>
           <label>
-            Email
+            <span>Email:</span>
             <input name="email" type="email" placeholder="Email"/>
           </label>
           <label>
-            Password
+            <span>Password:</span>
             <input name="password" type="password" placeholder="Password"/>
           </label>
-          {/*<button type="submit">Sign Up</button>*/}
           <Button type="submit" variant="outlined" color="primary">
             Sign Up
           </Button>
         </form>
       </Box>
       <hr/>
-      <Box>
-        <h3>Have an account?</h3>
-        {/*<button onClick={() => history.push("/login")}>Log In</button>*/}
-        <Button onClick={() => history.push("/login")} type="submit" variant="outlined" color="primary">
+      <Box className="another-page">
+        <span>Have an account?</span>
+        <Button onClick={() => history.push("/login")} color="primary">
           Log In
         </Button>
       </Box>

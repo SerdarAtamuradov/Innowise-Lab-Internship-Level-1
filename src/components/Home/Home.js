@@ -6,7 +6,7 @@ import './Home.css';
 
 const Home = () => {
   return (
-    <Container className="container">
+    <Container className="home-container">
       <h1>Tassker</h1>
       <IconButton onClick={() => app.auth().signOut()} aria-label="signout">
         <ExitToAppOutlinedIcon/>
