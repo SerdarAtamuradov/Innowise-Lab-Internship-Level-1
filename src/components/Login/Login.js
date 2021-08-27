@@ -1,5 +1,5 @@
 import React, {useCallback, useContext} from 'react';
-import app from "../../firebase";
+import firebase from "../../firebase";
 import {Redirect, withRouter} from "react-router-dom";
 import {AuthContext} from "../../Auth";
 import {Box, Button, Container} from "@material-ui/core";
@@ -10,7 +10,7 @@ const Login = ({history}) => {
     event.preventDefault();
     const {email, password} = event.target.elements;
     try {
-      await app.auth().signInWithEmailAndPassword(email.value, password.value);
+      await firebase.auth().signInWithEmailAndPassword(email.value, password.value);
       history.push("/");
     } catch (e) {
       alert(e);

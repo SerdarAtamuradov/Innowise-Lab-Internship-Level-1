@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import app from "../../firebase";
+import firebase from "../../firebase";
 import {withRouter} from "react-router-dom";
 import {Box, Button, Container} from "@material-ui/core";
 import '../component.css';
@@ -9,7 +9,7 @@ const SignUp = ({history}) => {
     event.preventDefault();
     const {email, password} = event.target.elements;
     try {
-      await app.auth().createUserWithEmailAndPassword(email.value, password.value);
+      await firebase.auth().createUserWithEmailAndPassword(email.value, password.value);
       history.push("/");
     } catch (e) {
       alert(e);
