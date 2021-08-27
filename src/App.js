@@ -7,6 +7,7 @@ import {AuthProvider} from "./Auth";
 import PrivateRoute from "./PrivateRoute";
 import './App.css';
 import EditTodo from "./components/EditTodo/EditTodo";
+import AddNewTodo from "./components/AddNewTodo/AddNewTodo";
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/editTodo" component={EditTodo}/>
+          <Route exact path="/addTodo" component={AddNewTodo}/>
         </Switch>
       </Router>
     </AuthProvider>
