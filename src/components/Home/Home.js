@@ -25,7 +25,6 @@ const Home = ({history}) => {
       userCollection.find(item => item.userId === currentUser.currentUser.uid),
     [currentUser.currentUser.uid, userCollection]);
 
-
   return (
     <Container>
       <Box className={"header"}>
@@ -35,7 +34,7 @@ const Home = ({history}) => {
         </IconButton>
       </Box>
       <h3>Todos:</h3>
-      <TaskGroup todos={user?.todos}/>
+      <TaskGroup user={user}/>
       <Box className="btn-container">
         <button className="create-btn" onClick={() => history.push({
           pathname: "/addTodo",

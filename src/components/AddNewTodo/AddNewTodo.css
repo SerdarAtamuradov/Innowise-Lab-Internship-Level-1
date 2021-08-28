@@ -1,18 +1,25 @@
-.header {
+.new-todo-header {
   display: flex !important;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   color: cornflowerblue;
 }
 
-.btn-container {
+.new-todo__box {
   margin: 20px auto;
   display: flex;
   justify-content: center;
   width: 250px;
 }
 
-.create-btn {
+.new-todo__box input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid darkgray;
+  border-radius: 6px;
+}
+
+.new-todo__create-btn {
   width: 100%;
   padding: 10px;
   font-size: 16px;

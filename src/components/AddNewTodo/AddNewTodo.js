@@ -1,20 +1,20 @@
 import React, {useContext, useMemo, useState} from 'react';
-import {Box, Checkbox, Container, IconButton} from "@material-ui/core";
+import {Box, Container, IconButton} from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import firebase from "firebase";
 import {AuthContext} from "../../Auth";
+import './AddNewTodo.css';
 
 const AddNewTodo = ({history}) => {
   const user = useMemo(() => history.location.state, [history]);
   const [newTodo, setNewTodo] = useState('');
-  const [checked, setChecked] = useState(true);
 
   const currentUser = useContext(AuthContext);
 
   const onCreate = async () => {
     user?.todos.push({
       todoName: newTodo,
-      completed: checked,
+      completed: false,
       id: Date.now().toString()
     });
 
@@ -28,32 +28,24 @@ const AddNewTodo = ({history}) => {
 
   return (
     <Container>
-      <Box className={"header"}>
-        <h1>Add Todo</h1>
+      <Box className={"new-todo-header"}>
         <IconButton onClick={() => history.push("/")} color="primary"
                     aria-label="edit todo">
           <ArrowBackIcon/>
         </IconButton>
+        <h1>Add Todo</h1>
       </Box>
-      <Box>
-        <Checkbox
-          checked={checked}
-          onChange={(
-            event => {
-              setChecked(event.target.checked);
-            })}
-          size="small"
-          inputProps={{'aria-label': 'primary checkbox'}}
-        />
+      <Box className="new-todo__box">
         <input
           value={newTodo}
           onChange={e => {
             setNewTodo(e.target.value);
           }}
+          placeholder="Add new Todo"
         />
       </Box>
-      <Box className="btn-container">
-        <button className="create-btn" onClick={onCreate}>Add todo</button>
+      <Box className="new-todo__box">
+        <button className="new-todo__create-btn" onClick={onCreate}>Add todo</button>
       </Box>
     </Container>
   );

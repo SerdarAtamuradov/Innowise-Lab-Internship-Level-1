@@ -4,10 +4,10 @@ import {Box, IconButton} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import './TaskGroup.css';
 
-const TaskGroup = ({history, todos}) => {
+const TaskGroup = ({history, user}) => {
   return (
     <ul>
-      {todos?.map(todo => (
+      {user?.todos?.map(todo => (
         <li key={todo?.id}>
           <Box className={"todo-container"}>
             <Box className={"text-container"}>
@@ -17,7 +17,10 @@ const TaskGroup = ({history, todos}) => {
             <IconButton color="primary" aria-label="edit todo"
                         onClick={() => history.push({
                           pathname: "/editTodo",
-                          state: todo
+                          state: {
+                            user,
+                            todo
+                          }
                         })}>
               <EditIcon/>
             </IconButton>
