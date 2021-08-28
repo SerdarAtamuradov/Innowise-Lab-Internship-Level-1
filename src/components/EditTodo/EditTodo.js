@@ -1,6 +1,7 @@
 import React, {useContext, useMemo, useState} from 'react';
 import {Box, Container, FormControl, IconButton, InputLabel, MenuItem, Select} from "@material-ui/core";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import DeleteIcon from '@material-ui/icons/Delete';
 import firebase from "../../firebase";
 import './EditTodo.css';
 import {AuthContext} from "../../Auth";
@@ -28,11 +29,22 @@ const EditTodo = ({history}) => {
     }, 100);
   };
 
-  //
-  // const handleDelete = () => {
-  //   const db = firebase.firestore();
-  //
-  // };
+
+  const handleDelete = async () => {
+    let index;
+    user?.todos.forEach((item, ind) => {
+      if (item.id === todo.id) index = ind;
+    });
+    user?.todos.splice(index, 1);
+
+    const db = firebase.firestore();
+    await db.collection("users").doc(currentUser.currentUser?.uid).set(user);
+
+    setTimeout(() => {
+      history.push("/");
+    }, 100);
+
+  };
 
 
   return (
@@ -43,6 +55,10 @@ const EditTodo = ({history}) => {
           <ArrowBackIcon/>
         </IconButton>
         <h1>Edit Todo</h1>
+        <IconButton onClick={handleDelete} color="primary"
+                    aria-label="edit todo">
+          <DeleteIcon/>
+        </IconButton>
       </Box>
       <Box className="edit-todo__box">
         <input
@@ -67,13 +83,10 @@ const EditTodo = ({history}) => {
             <MenuItem value={false}>In Progress</MenuItem>
           </Select>
         </FormControl>
+        <Box className="edit-todo__btn-box">
+          <button className="edit-todo__edit-btn" onClick={handleUpdate}>Save Changes</button>
+        </Box>
       </Box>
-      <Box className="edit-todo__btn-box">
-        <button className="edit-todo__edit-btn" onClick={handleUpdate}>Save Changes</button>
-      </Box>
-      {/*<button onClick={handleUpdate}>edit</button>*/}
-      {/*<button onClick={handleDelete}>delete</button>*/}
-
     </Container>
   );
 };
