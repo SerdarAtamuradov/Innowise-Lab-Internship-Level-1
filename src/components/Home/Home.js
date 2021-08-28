@@ -24,12 +24,8 @@ const Home = ({history}) => {
   }, []);
 
   const user = useMemo(() =>
-    userCollection.find(item => item.userId === currentUser.currentUser.uid), [userCollection]);
-  console.log('user', user);
-  
-  const handleAddNewTodo = () => {
+    userCollection.find(item => item.userId === currentUser.currentUser.uid), [currentUser.currentUser.uid, userCollection]);
 
-  };
 
   return (
     <Container>
@@ -39,10 +35,14 @@ const Home = ({history}) => {
           <ExitToAppOutlinedIcon/>
         </IconButton>
       </Box>
+      <h3>Todos:</h3>
       <TaskGroup user={user}/>
-      <button onClick={() => history.push("/addTodo")}>Add New Todoss</button>
+      <Box className="btn-container">
+        <button className="create-btn" onClick={() => history.push("/addTodo")}>Add New Todoss</button>
+      </Box>
     </Container>
   );
 };
+
 
 export default Home;

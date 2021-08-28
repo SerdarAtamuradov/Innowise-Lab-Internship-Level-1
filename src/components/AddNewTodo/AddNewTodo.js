@@ -9,13 +9,12 @@ const AddNewTodo = () => {
 
   const currentUser = useContext(AuthContext);
 
-  const onCreate = async () => {
+  const onCreate = () => {
     const db = firebase.firestore();
     const userData = db.collection("users").doc(currentUser.currentUser.uid);
 
-    await userData.get().then((doc) => {
+    userData.get().then((doc) => {
       if (doc.exists) {
-        // console.log("Document data:", doc.data());
         const docs = doc.data();
 
         docs.todos.push({
@@ -24,13 +23,9 @@ const AddNewTodo = () => {
           id: Date.now().toString()
         });
 
-        // console.log('new one', docs);
-
         userData.set(docs);
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
+      } else console.log("No such document!");
+
     }).catch((error) => {
       console.log("Error getting document:", error);
     });
