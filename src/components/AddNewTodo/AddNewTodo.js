@@ -1,56 +1,61 @@
-import React, {useContext, useState} from 'react';
-import {Checkbox} from "@material-ui/core";
-import {AuthContext} from "../../Auth";
+import React, {useContext, useMemo, useState} from 'react';
+import {Box, Checkbox, Container, IconButton} from "@material-ui/core";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import firebase from "firebase";
+import {AuthContext} from "../../Auth";
 
-const AddNewTodo = () => {
+const AddNewTodo = ({history}) => {
+  const user = useMemo(() => history.location.state, [history]);
   const [newTodo, setNewTodo] = useState('');
   const [checked, setChecked] = useState(true);
 
   const currentUser = useContext(AuthContext);
 
-  const onCreate = () => {
-    const db = firebase.firestore();
-    const userData = db.collection("users").doc(currentUser.currentUser.uid);
-
-    userData.get().then((doc) => {
-      if (doc.exists) {
-        const docs = doc.data();
-
-        docs.todos.push({
-          todoName: newTodo,
-          completed: checked,
-          id: Date.now().toString()
-        });
-
-        userData.set(docs);
-      } else console.log("No such document!");
-
-    }).catch((error) => {
-      console.log("Error getting document:", error);
+  const onCreate = async () => {
+    user?.todos.push({
+      todoName: newTodo,
+      completed: checked,
+      id: Date.now().toString()
     });
-  };
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
+    const db = firebase.firestore();
+    await db.collection("users").doc(currentUser.currentUser.uid).set(user);
+
+    setTimeout(() => {
+      history.push("/");
+    }, 100);
   };
 
   return (
-    <>
-      <Checkbox
-        checked={checked}
-        onChange={handleChange}
-        size="small"
-        inputProps={{'aria-label': 'primary checkbox'}}
-      />
-      <input
-        value={newTodo}
-        onChange={e => {
-          setNewTodo(e.target.value);
-        }}
-      />
-      <button onClick={onCreate}>Add todo</button>
-    </>
+    <Container>
+      <Box className={"header"}>
+        <h1>Add Todo</h1>
+        <IconButton onClick={() => history.push("/")} color="primary"
+                    aria-label="edit todo">
+          <ArrowBackIcon/>
+        </IconButton>
+      </Box>
+      <Box>
+        <Checkbox
+          checked={checked}
+          onChange={(
+            event => {
+              setChecked(event.target.checked);
+            })}
+          size="small"
+          inputProps={{'aria-label': 'primary checkbox'}}
+        />
+        <input
+          value={newTodo}
+          onChange={e => {
+            setNewTodo(e.target.value);
+          }}
+        />
+      </Box>
+      <Box className="btn-container">
+        <button className="create-btn" onClick={onCreate}>Add todo</button>
+      </Box>
+    </Container>
   );
 };
 
