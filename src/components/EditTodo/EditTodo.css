@@ -7,7 +7,7 @@
 
 .edit-todo__box {
   width: 300px;
-  height: 260px;
+  height: 250px;
   margin: 20px auto;
   display: flex;
   flex-direction: column;
@@ -38,4 +38,26 @@
   background: dodgerblue;
   border: 1px solid cadetblue;
   border-radius: 12px;
+}
+
+@media (max-width: 400px) {
+  .edit-todo__box {
+    width: 250px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 360px) {
+  .edit-todo__box {
+    width: 230px;
+    height: 240px;
+  }
+  
+  .edit-todo__btn-box {
+    width: 200px;
+  }
+
+  .edit-todo__edit-btn {
+    font-size: 14px;
+  }
 }

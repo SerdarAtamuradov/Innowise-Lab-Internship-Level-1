@@ -28,3 +28,19 @@
   border: 1px solid cadetblue;
   border-radius: 12px;
 }
+
+@media (max-width: 400px) {
+  .new-todo__box {
+    width: 250px;
+  }
+}
+
+@media (max-width: 360px) {
+  .new-todo__box {
+    width: 220px;
+  }
+
+  .new-todo__create-btn {
+    font-size: 14px;
+  }
+}
