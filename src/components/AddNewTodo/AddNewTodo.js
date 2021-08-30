@@ -4,6 +4,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import firebase from "firebase";
 import {AuthContext} from "../../Auth";
 import './AddNewTodo.css';
+import renderObj from "../../defaultDocFields";
 
 const AddNewTodo = ({history}) => {
   const user = useMemo(() => history.location.state, [history]);
@@ -12,6 +13,19 @@ const AddNewTodo = ({history}) => {
   const currentUser = useContext(AuthContext);
 
   const onCreate = async () => {
+    if (user === undefined) {
+      const userData = renderObj(currentUser.currentUser.uid);
+      userData.todos.push({
+        todoName: newTodo,
+        completed: false,
+        id: Date.now().toString()
+      });
+
+      const db = firebase.firestore();
+      await db.collection("users").doc(currentUser.currentUser.uid).set(userData);
+      return;
+    }
+
     user?.todos.push({
       todoName: newTodo,
       completed: false,

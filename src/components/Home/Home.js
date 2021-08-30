@@ -11,7 +11,6 @@ const Home = ({history}) => {
 
   const currentUser = useContext(AuthContext);
 
-
   useEffect(() => {
     const fetchData = async () => {
       const db = firebase.firestore();
@@ -22,8 +21,8 @@ const Home = ({history}) => {
   }, []);
 
   const user = useMemo(() =>
-      userCollection.find(item => item.userId === currentUser.currentUser.uid),
-    [currentUser.currentUser.uid, userCollection]);
+      userCollection.find(item => item.userId === currentUser.currentUser.uid)
+    , [currentUser.currentUser.uid, userCollection]);
 
   return (
     <Container>
