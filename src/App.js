@@ -18,8 +18,8 @@ const App = () => {
           <PrivateRoute exact path="/" component={Home}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={SignUp}/>
-          <Route exact path="/editTodo" component={EditTodo}/>
-          <Route exact path="/addTodo" component={AddNewTodo}/>
+          <PrivateRoute exact path="/editTodo" component={EditTodo}/>
+          <PrivateRoute exact path="/addTodo" component={AddNewTodo}/>
         </Switch>
       </Router>
     </AuthProvider>

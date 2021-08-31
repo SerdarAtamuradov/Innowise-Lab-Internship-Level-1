@@ -3,7 +3,7 @@ import firebase from "../../firebase";
 import {Redirect, withRouter} from "react-router-dom";
 import {AuthContext} from "../../Auth";
 import {Box, Button, Container} from "@material-ui/core";
-import '../component.css';
+import './Login.css';
 
 const Login = ({history}) => {
   const handleLogin = useCallback(async event => {

@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import firebase from "../../firebase";
 import {withRouter} from "react-router-dom";
 import {Box, Button, Container} from "@material-ui/core";
-import '../component.css';
+import './SignUp.css';
 
 const SignUp = ({history}) => {
   const handleSignUp = useCallback(async event => {
